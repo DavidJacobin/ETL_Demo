@@ -45,5 +45,7 @@ if Response.status_code == 200:
         Dates.append(datetime.datetime.strptime(row['d'], '%Y-%m-%d'))
         Rates.append(decimal.Decimal(row['FXUSDCAD']['v']))
 
-print(Dates)
-print(Rates)
+    # creating petl table
+    exchange_Rates = petl.fromcolumns([Dates, Rates], header=['date', 'rate'])
+
+print(exchange_Rates)
