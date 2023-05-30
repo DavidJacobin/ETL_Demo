@@ -30,4 +30,20 @@ except Exception as e:
     print('could not read request')
     sys.exit()
 
-print(Response.text)
+#print(Response.text)
+
+# lists for data storage
+
+Dates = []
+Rates = []
+
+# response in to json
+if Response.status_code == 200:
+    Raw_info = json.loads(Response.text)
+
+    for row in Raw_info['observations']:
+        Dates.append(datetime.datetime.strptime(row['d'], '%Y-%m-%d'))
+        Rates.append(decimal.Decimal(row['FXUSDCAD']['v']))
+
+print(Dates)
+print(Rates)
